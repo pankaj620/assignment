@@ -1,0 +1,30 @@
+unclassified:
+  location:
+    adminAddress: "admin@example.com"   # replace this with a valid email
+
+  # Configure the EC2 agent
+  agentProtocols:
+    - ec2:
+        cloudName: "my-ec2-cloud"
+        credentialsId: "aws-credentials"  # Update with your AWS credentials ID
+        region: "ap-south-1"  # Update with your desired AWS region
+        instanceCapStr: "1"
+        templates:
+          - ami: "ami-1234567817283"  # Update with desired AMI
+            connectUsingPublicIp: true
+            labelString: "my-ec2-agent"
+            idleTerminationMinutesStr: "1"
+            initScript: |
+              #!/bin/bash
+              sudo yum install -y java-1.8.0-openjdk
+            remoteFS: "/home/ec2-user"
+            stopOnTerminate: true
+            type: "t2.micro"  # Update this with desired instance type
+
+
+# Make sure to replace placeholders like 
+# ami-12345678, 
+# us-east-1, 
+# admin@example.com, 
+# my-ec2-agent, 
+# aws-credentials
